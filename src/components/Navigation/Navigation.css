@@ -1,0 +1,21 @@
+.navigation__container {
+  display: flex;
+  gap: 16px;
+}
+
+.navigation__link {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.navigation__auth-btn {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #c6a664;
+  border-style: none;
+  cursor: pointer;
+  width: 91.641px;
+}
