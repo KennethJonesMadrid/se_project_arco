@@ -1,0 +1,264 @@
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+}
+
+/* Work Detail Container */
+.work-detail {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Close Button */
+.work-detail__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.work-detail__close:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.work-detail__close img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hero Section */
+.work-detail__hero {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+
+.work-detail__hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-detail__hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    transparent 100%
+  );
+}
+
+.work-detail__year-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.work-detail__year-badge img {
+  width: 16px;
+  height: 16px;
+}
+
+.work-detail__year-badge span {
+  color: #c6a664;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.work-detail__title {
+  color: white;
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Composer Section */
+.work-detail__composer-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.work-detail__composer-portrait-wrapper {
+  flex-shrink: 0;
+}
+
+.work-detail__composer-portrait {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #c6a664;
+}
+
+.work-detail__composer-info {
+  flex: 1;
+}
+
+.work-detail__composer-name {
+  color: #c6a664;
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+}
+
+.work-detail__composer-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.work-detail__composer-meta img {
+  width: 14px;
+  height: 14px;
+}
+
+.work-detail__info-section {
+  padding: 24px 32px 32px;
+}
+
+.work-detail__metadata {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 24px;
+}
+
+.work-detail__label {
+  letter-spacing: 0.5px;
+  margin: 0 0 8px 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.work-detail__value {
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+}
+
+.work-detail__duration {
+  display: flex;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+}
+
+.work-detail__duration img {
+  width: 16px;
+  height: 16px;
+}
+
+.work-detail__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.work-detail__play-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  background-color: #c6a664;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #000;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.work-detail__play-btn:hover {
+  background-color: #b89654;
+}
+
+.work-detail__play-btn-img {
+  width: 15px;
+  height: 15px;
+}
+
+.work-detail__save-btn {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #fff;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.work-detail__save-btn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.work-detail__save-btn img {
+  width: 14px;
+  height: 12px;
+}

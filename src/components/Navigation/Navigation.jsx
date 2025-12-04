@@ -1,10 +1,14 @@
 import "./Navigation.css";
 
-function Navigation() {
+function Navigation({ onLoginClick }) {
   return (
     <div className="navigation__container">
       <p className="navigation__link">Discover</p>
-      <button type="button" className="navigation__auth-btn">
+      <button
+        onClick={onLoginClick}
+        type="button"
+        className="navigation__auth-btn"
+      >
         Sign In
       </button>
     </div>
