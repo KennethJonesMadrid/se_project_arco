@@ -1,7 +1,32 @@
+import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
 function LoginModal({ isOpen, onClose, onToggleToRegister }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const isFormValid = email && password;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!isFormValid) return;
+
+    console.log({ email, password });
+
+    setEmail("");
+    setPassword("");
+    onClose();
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setEmail("");
+      setPassword("");
+    }
+  }, [isOpen]);
+
   return (
     <ModalWithForm
       title="Login"
@@ -13,10 +38,16 @@ function LoginModal({ isOpen, onClose, onToggleToRegister }) {
       isOpen={isOpen}
       onClose={onClose}
       onToggle={onToggleToRegister}
+      isFormValid={isFormValid}
+      onSubmit={handleSubmit}
     >
       <label className="form__label">
         Email
         <input
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
           className="form__input"
           type="text"
           placeholder="your.email@example.com"
@@ -25,6 +56,10 @@ function LoginModal({ isOpen, onClose, onToggleToRegister }) {
       <label className="form__label">
         Password
         <input
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
           type="text"
           placeholder="••••••••"
           className="form__input"

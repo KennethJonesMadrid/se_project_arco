@@ -9,6 +9,8 @@ function ModalWithForm({
   isOpen,
   onClose,
   onToggle,
+  onSubmit,
+  isFormValid,
 }) {
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -25,9 +27,13 @@ function ModalWithForm({
         <button className="modal__close" type="button" onClick={onClose}>
           <img className="modal__close-icon" src={closeIcon} alt="close" />
         </button>
-        <form className="modal__form">
+        <form onSubmit={onSubmit} className="modal__form">
           {children}
-          <button type="submit" className="modal__submit-btn">
+          <button
+            type="submit"
+            disabled={!isFormValid}
+            className="modal__submit-btn"
+          >
             {buttonText}
           </button>
           <div className="modal__auth-link-container">

@@ -14,6 +14,7 @@ import { mockWorks } from "../../utils/mockData";
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleLoginClick = () => {
     setActiveModal("login");
@@ -31,6 +32,10 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
     setSelectedCard(null);
+  };
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
   };
 
   useEffect(() => {
@@ -52,8 +57,8 @@ function App() {
     <div className="page">
       <div className="page__content">
         <Header onLoginClick={handleLoginClick} />
-        <Hero />
-        <Main onWorkClick={handleWorkCardClick} />
+        <Hero onSearch={handleSearch} />
+        <Main searchQuery={searchQuery} onWorkClick={handleWorkCardClick} />
         <Footer />
       </div>
       <LoginModal

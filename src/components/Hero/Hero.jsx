@@ -1,7 +1,7 @@
 import "./Hero.css";
 import SearchForm from "../SearchForm/SearchForm";
 
-function Hero() {
+function Hero({ onSearch }) {
   return (
     <div className="hero">
       <div className="hero__content">
@@ -10,7 +10,7 @@ function Hero() {
           Explore the world's greatest violin concertos and works from classical
           masters
         </p>
-        <SearchForm />
+        <SearchForm onSearch={onSearch} />
       </div>
     </div>
   );
