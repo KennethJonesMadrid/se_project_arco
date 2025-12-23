@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
-function LoginModal({ isOpen, onClose, onToggleToRegister }) {
+function LoginModal({ isOpen, onClose, onToggleToRegister, onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,11 +13,10 @@ function LoginModal({ isOpen, onClose, onToggleToRegister }) {
 
     if (!isFormValid) return;
 
-    console.log({ email, password });
+    onLogin({ email });
 
     setEmail("");
     setPassword("");
-    onClose();
   };
 
   useEffect(() => {
@@ -60,7 +59,7 @@ function LoginModal({ isOpen, onClose, onToggleToRegister }) {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
-          type="text"
+          type="password"
           placeholder="••••••••"
           className="form__input"
         ></input>

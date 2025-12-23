@@ -3,12 +3,14 @@ import DateIcon from "../../assets/date-icon.png";
 import DurationIcon from "../../assets/duration-icon.svg";
 import PlayIcon from "../../assets/play-icon.png";
 import LikeIcon from "../../assets/like-icon.png";
-import { mockWorks } from "../../utils/mockData";
 
-function WorkCard({ onWorkClick, work }) {
+function WorkCard({ onWorkClick, work, isSaved, onSaveWork }) {
+  const handleLikeClick = () => {
+    onSaveWork(work);
+  };
   return (
-    <li onClick={onWorkClick} className="work-card">
-      <div className="work-card__image-wrapper">
+    <li className="work-card">
+      <div onClick={onWorkClick} className="work-card__image-wrapper">
         <img
           src={work.composer.portrait || work.image}
           alt={`${work.composer.complete_name} - ${work.title}`}
@@ -35,7 +37,13 @@ function WorkCard({ onWorkClick, work }) {
             <button type="button" className="work-card__play-btn">
               <img className="work-card__play-icon" src={PlayIcon} alt="Play" />
             </button>
-            <button type="button" className="work-card__like-btn">
+            <button
+              type="button"
+              className={`work-card__like-btn ${
+                isSaved ? "work-card__like-btn_active" : ""
+              }`}
+              onClick={handleLikeClick}
+            >
               <img className="work-card__like-icon" src={LikeIcon} alt="Like" />
             </button>
           </div>

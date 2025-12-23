@@ -13,6 +13,7 @@
   width: 100%;
   height: 450px;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .work-card__content {
@@ -135,5 +136,12 @@
   cursor: pointer;
 }
 
+.work-card__like-btn_active .work-card__like-icon {
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.9));
+}
+
 .work-card__like-icon {
+  opacity: 0.6;
+  transform: scale(1);
 }

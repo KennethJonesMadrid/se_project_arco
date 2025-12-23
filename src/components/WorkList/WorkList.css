@@ -3,9 +3,32 @@
 .cards__list {
   display: flex;
   list-style: none;
-  margin: 0;
+  margin-top: 25px;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
+}
+
+.cards__show-more-btn {
+  display: block;
+  background-color: transparent;
+  justify-content: center;
+  margin: 32px auto 0;
+  justify-content: center;
+  border-style: none;
+  color: #c6a664;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.cards__show-more-btn:hover {
+  opacity: 1;
+  filter: drop-shadow(2px 0 7px rgba(245, 200, 66, 0.9));
 }

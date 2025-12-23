@@ -1,11 +1,17 @@
+import { useState, useEffect } from "react";
+
 import "./WorkList.css";
-import { getViolinWorks } from "../../utils/mockData";
 import WorkCard from "../WorkCard/WorkCard";
+import { INITIAL_WORKS_COUNT, WORKS_INCREMENT } from "../../utils/config";
 
-function WorkList({ onWorkClick, searchQuery }) {
-  const violinWorks = getViolinWorks();
+function WorkList({ onWorkClick, searchQuery, savedWorks, onSaveWork, works }) {
+  const [visibleCount, setVisibleCount] = useState(INITIAL_WORKS_COUNT);
 
-  const filteredWorks = violinWorks.filter((work) => {
+  useEffect(() => {
+    setVisibleCount(INITIAL_WORKS_COUNT);
+  }, [searchQuery]);
+
+  const filteredWorks = works.filter((work) => {
     if (!searchQuery) return true;
 
     const query = searchQuery.toLowerCase();
@@ -20,18 +26,32 @@ function WorkList({ onWorkClick, searchQuery }) {
     );
   });
 
+  const visibleWorks = filteredWorks.slice(0, visibleCount);
+
   return (
     <div className="cards">
       <ul className="cards__list">
-        {filteredWorks.map((work) => {
+        {visibleWorks.map((work) => {
+          const isSaved = savedWorks.some((w) => w.id === work.id);
           return (
             <WorkCard
               onWorkClick={() => onWorkClick(work)}
               work={work}
               key={work.id}
+              isSaved={isSaved}
+              onSaveWork={onSaveWork}
             />
           );
         })}
+        {visibleCount < filteredWorks.length && (
+          <button
+            type="button"
+            className="cards__show-more-btn"
+            onClick={() => setVisibleCount((count) => count + WORKS_INCREMENT)}
+          >
+            Show more
+          </button>
+        )}
       </ul>
     </div>
   );

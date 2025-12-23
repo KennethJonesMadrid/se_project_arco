@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
 
-function RegisterModal({ isOpen, onClose, onToggleToLogin }) {
+function RegisterModal({ isOpen, onClose, onToggleToLogin, onRegister }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,13 +18,12 @@ function RegisterModal({ isOpen, onClose, onToggleToLogin }) {
 
     if (!isFormValid) return;
 
-    console.log({ name, email, password, confirmPassword });
+    onRegister({ name, email });
 
     setName("");
     setEmail("");
     setPassword("");
     setConfirmPassword("");
-    onClose();
   };
 
   useEffect(() => {
@@ -75,7 +74,7 @@ function RegisterModal({ isOpen, onClose, onToggleToLogin }) {
         <input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          type="text"
+          type="password"
           placeholder="••••••••"
           className="form__input"
         ></input>
@@ -85,7 +84,7 @@ function RegisterModal({ isOpen, onClose, onToggleToLogin }) {
         <input
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          type="text"
+          type="password"
           placeholder="••••••••"
           className="form__input"
         ></input>
