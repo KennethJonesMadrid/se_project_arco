@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import "./WorkList.css";
 import WorkCard from "../WorkCard/WorkCard";
-import { INITIAL_WORKS_COUNT, WORKS_INCREMENT } from "../../utils/config";
+import { INITIAL_WORKS_COUNT, WORKS_INCREMENT } from "../../utils/constants";
 
 function WorkList({ onWorkClick, searchQuery, savedWorks, onSaveWork, works }) {
   const [visibleCount, setVisibleCount] = useState(INITIAL_WORKS_COUNT);

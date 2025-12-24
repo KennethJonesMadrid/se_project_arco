@@ -7,12 +7,18 @@ import Hero from "../Hero/Hero";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import WorkDetailModal from "../WorkDetailModal/WorkDetailModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { mockWorks } from "../../utils/mockData";
+import {
+  searchAll,
+  transformSearchResults,
+  filterViolinWorks,
+  getFeaturedWorks,
+  pickRandom,
+} from "../../utils/openOpusApi";
+import { getViolinWorks } from "../../utils/mockData";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -21,8 +27,15 @@ function App() {
   const [savedWorks, setSavedWorks] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
+  const [works, setWorks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
+
+  const isWorkSaved = selectedCard
+    ? savedWorks.some((w) => w.id === selectedCard.id)
+    : false;
 
   const handleLoginClick = () => {
     setActiveModal("login");
@@ -44,6 +57,33 @@ function App() {
 
   const handleSearch = (query) => {
     setSearchQuery(query);
+    setIsLoading(true);
+    setErrorMessage(null);
+
+    const q = `${query} violin`;
+
+    searchAll(q)
+      .then((res) => {
+        const transformedWorks = transformSearchResults(res);
+
+        setWorks(transformedWorks);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error("Search error", err);
+        setErrorMessage("Could not fetch results. Showing sample data");
+
+        const fallbackWorks = getViolinWorks().filter(
+          (work) =>
+            work.title.toLowerCase().includes(query.toLowerCase()) ||
+            work.composer.complete_name
+              .toLowerCase()
+              .includes(query.toLowerCase())
+        );
+
+        setWorks(fallbackWorks);
+        setIsLoading(false);
+      });
   };
 
   const handleSaveWorkToggle = (work) => {
@@ -87,6 +127,32 @@ function App() {
     };
   }, [activeModal, closeActiveModal]);
 
+  useEffect(() => {
+    setIsLoading(true);
+    setErrorMessage(null);
+    setSearchQuery("");
+
+    getFeaturedWorks()
+      .then((res) => {
+        const transformedWorks = transformSearchResults(res);
+        const violinWorks = filterViolinWorks(transformedWorks);
+
+        const featuredWorks = pickRandom(violinWorks, 12);
+
+        setWorks(featuredWorks);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error loading featured works", err);
+        setErrorMessage("Could not load featured works. Showing sample data");
+
+        setWorks(pickRandom(getViolinWorks(), 12));
+        setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {});
+
   return (
     <div className="page">
       <div className="page__content">
@@ -107,6 +173,9 @@ function App() {
                   onWorkClick={handleWorkCardClick}
                   savedWorks={savedWorks}
                   onSaveWork={handleSaveWorkToggle}
+                  works={works}
+                  isLoading={isLoading}
+                  errorMessage={errorMessage}
                 />
               </>
             }
@@ -143,6 +212,8 @@ function App() {
         isOpen={activeModal === "workDetail"}
         onClose={closeActiveModal}
         work={selectedCard}
+        onSaveWork={handleSaveWorkToggle}
+        isSaved={isWorkSaved}
       />
     </div>
   );

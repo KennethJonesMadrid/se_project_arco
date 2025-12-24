@@ -3,12 +3,15 @@ import closeIcon from "../../assets/close-icon.png";
 import saveIcon from "../../assets/like-icon.png";
 import playIcon from "../../assets/play-icon.png";
 import dateIcon from "../../assets/date-icon.png";
-import durationIcon from "../../assets/duration-icon.svg";
 
-function WorkDetailModal({ work, isOpen, onClose }) {
+function WorkDetailModal({ work, isOpen, onClose, onSaveWork, isSaved }) {
   if (!isOpen || !work) {
     return null;
   }
+
+  const handleSaveClick = () => {
+    onSaveWork(work);
+  };
 
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
@@ -61,13 +64,6 @@ function WorkDetailModal({ work, isOpen, onClose }) {
               <p className="work-detail__label">Genre</p>
               <p className="work-detail__value">{work.genre}</p>
             </div>
-            <div>
-              <p className="work-detail__label">Duration</p>
-              <div className="work-detail__duration">
-                <img src={durationIcon} alt="duration" />
-                <p className="work-detail__value">~ {work.duration}</p>
-              </div>
-            </div>
           </div>
 
           <div className="work-detail__actions">
@@ -75,9 +71,15 @@ function WorkDetailModal({ work, isOpen, onClose }) {
               <img src={playIcon} alt="play" />
               Play
             </button>
-            <button className="work-detail__save-btn" type="button">
+            <button
+              className={`work-detail__save-btn ${
+                isSaved ? "work-detail__save-btn_active" : ""
+              }`}
+              type="button"
+              onClick={handleSaveClick}
+            >
               <img src={saveIcon} alt="save" />
-              Save
+              {isSaved ? "Saved" : "Save"}
             </button>
           </div>
         </div>

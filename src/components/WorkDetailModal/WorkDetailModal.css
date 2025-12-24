@@ -8,7 +8,6 @@
   z-index: 999;
 }
 
-/* Work Detail Container */
 .work-detail {
   position: fixed;
   top: 50%;
@@ -24,7 +23,6 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Close Button */
 .work-detail__close {
   position: absolute;
   top: 20px;
@@ -51,7 +49,6 @@
   height: 20px;
 }
 
-/* Hero Section */
 .work-detail__hero {
   position: relative;
   width: 100%;
@@ -110,7 +107,6 @@
   margin: 0;
 }
 
-/* Composer Section */
 .work-detail__composer-section {
   display: flex;
   align-items: center;
@@ -254,8 +250,17 @@
   line-height: 24px;
 }
 
+.work-detail__save-btn_active {
+  background-color: rgba(198, 166, 100, 0.15);
+}
+
 .work-detail__save-btn:hover {
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.work-detail__save-btn_active img {
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.9));
 }
 
 .work-detail__save-btn img {

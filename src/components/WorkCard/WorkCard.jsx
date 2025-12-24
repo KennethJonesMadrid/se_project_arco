@@ -31,7 +31,7 @@ function WorkCard({ onWorkClick, work, isSaved, onSaveWork }) {
               src={DurationIcon}
               alt="Duration"
             />
-            <p className="work-card__duration">{`~ ${work.duration}`}</p>
+            <p className="work-card__period">{work.composer.epoch}</p>
           </div>
           <div className="work-card__actions-btns">
             <button type="button" className="work-card__play-btn">

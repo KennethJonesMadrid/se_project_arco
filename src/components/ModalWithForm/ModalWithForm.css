@@ -104,3 +104,8 @@
 .form__input {
   color: #ffffffcc;
 }
+
+.form__input:focus {
+  outline: 2px solid #c6a664;
+  outline-offset: 2px;
+}

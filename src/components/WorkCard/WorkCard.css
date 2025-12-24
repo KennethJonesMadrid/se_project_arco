@@ -3,10 +3,12 @@
   display: flex;
   flex-direction: column;
   width: 442.695px;
+  height: 600px;
 }
 
 .work-card__image-wrapper {
   position: relative;
+  flex-shrink: 0;
 }
 
 .work-card__image {
@@ -19,6 +21,9 @@
 .work-card__content {
   background-color: #121212;
   padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .work-card__year-badge-container {
@@ -59,11 +64,16 @@
   line-height: 24.2px;
   letter-spacing: 0.176px;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .work-card__composer {
   color: rgba(255, 255, 255, 0.6);
-  font-family: Inter;
+  font-family: "Inter", sans-serif;
   font-size: 13.6px;
   font-style: normal;
   font-weight: 500;
@@ -72,6 +82,9 @@
   text-transform: uppercase;
   margin-top: 3.65px;
   margin-bottom: 12.86px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .work-card__footer {
@@ -80,6 +93,7 @@
   align-items: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 11.97px;
+  margin-top: auto;
 }
 
 .work-card__duration-container {
@@ -90,9 +104,9 @@
 .work-card__duration-icon {
 }
 
-.work-card__duration {
+.work-card__period {
   color: rgba(255, 255, 255, 0.5);
-  font-family: Inter;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
