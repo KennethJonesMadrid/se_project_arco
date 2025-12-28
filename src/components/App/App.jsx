@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import "./App.css";
+import * as auth from "../../utils/auth";
 import Header from "../Header/Header";
 import Hero from "../Hero/Hero";
 import Footer from "../Footer/Footer";
@@ -30,6 +31,8 @@ function App() {
   const [works, setWorks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("arco_token") || "");
+  const [authError, setAuthError] = useState("");
 
   const navigate = useNavigate();
 
@@ -38,16 +41,26 @@ function App() {
     : false;
 
   const handleLoginClick = () => {
+    setAuthError("");
     setActiveModal("login");
   };
 
   const handleRegisterClick = () => {
+    setAuthError("");
     setActiveModal("register");
   };
 
   const handleWorkCardClick = (card) => {
     setSelectedCard(card);
     setActiveModal("workDetail");
+  };
+
+  const handlePlayWork = (work) => {
+    const query = `${work.composer.complete_name} ${work.title} violin`;
+    const youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+      query
+    )}`;
+    window.open(youtubeUrl, "_blank");
   };
 
   const closeActiveModal = () => {
@@ -94,22 +107,52 @@ function App() {
     });
   };
 
-  const handleRegister = ({ name, email }) => {
-    setCurrentUser({ name, email });
-    setIsLoggedIn(true);
-    closeActiveModal();
+  const handleRegister = ({ name, email, password, confirmPassword }) => {
+    setAuthError("");
+
+    auth
+      .register(name, email, password)
+      .then((data) => {
+        setToken(data.token);
+        setCurrentUser(data.user);
+        setIsLoggedIn(true);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Registration failed", err);
+        setAuthError(err.message || "Registration failed");
+      });
   };
 
-  const handleLogin = ({ email }) => {
-    setCurrentUser((prev) => ({ ...prev, email }));
-    setIsLoggedIn(true);
-    closeActiveModal();
+  const handleLogin = ({ email, password }) => {
+    setAuthError("");
+
+    auth
+      .authorize(email, password)
+      .then((data) => {
+        setToken(data.token);
+        setCurrentUser(data.user);
+        setIsLoggedIn(true);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Login failed", err);
+        setAuthError(err.message || "Login failed");
+      });
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
-    setCurrentUser({ name: "", email: "" });
-    navigate("/");
+    auth
+      .logout()
+      .then(() => {
+        setToken("");
+        setCurrentUser({ name: "", email: "" });
+        setIsLoggedIn(false);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error("Logout failed", err);
+      });
   };
 
   useEffect(() => {
@@ -151,7 +194,29 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {});
+  useEffect(() => {
+    const savedToken = localStorage.getItem("arco_token");
+
+    if (!savedToken) {
+      return;
+    }
+
+    auth
+      .checkToken(savedToken)
+      .then((userData) => {
+        setToken(savedToken);
+        setCurrentUser(userData);
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        console.error("Token validation failed", err);
+        localStorage.removeItem("arco_token");
+      });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("arco_savedWorks", JSON.stringify(savedWorks));
+  }, [savedWorks]);
 
   return (
     <div className="page">
@@ -176,6 +241,7 @@ function App() {
                   works={works}
                   isLoading={isLoading}
                   errorMessage={errorMessage}
+                  onPlayWork={handlePlayWork}
                 />
               </>
             }
@@ -189,6 +255,7 @@ function App() {
                   onWorkClick={handleWorkCardClick}
                   onSaveWork={handleSaveWorkToggle}
                   currentUser={currentUser}
+                  onPlayWork={handlePlayWork}
                 />
               </ProtectedRoute>
             }
@@ -201,12 +268,14 @@ function App() {
         onClose={closeActiveModal}
         onToggleToRegister={handleRegisterClick}
         onLogin={handleLogin}
+        authError={authError}
       />
       <RegisterModal
         isOpen={activeModal === "register"}
         onClose={closeActiveModal}
         onToggleToLogin={handleLoginClick}
         onRegister={handleRegister}
+        authError={authError}
       />
       <WorkDetailModal
         isOpen={activeModal === "workDetail"}
@@ -214,6 +283,7 @@ function App() {
         work={selectedCard}
         onSaveWork={handleSaveWorkToggle}
         isSaved={isWorkSaved}
+        onPlayWork={handlePlayWork}
       />
     </div>
   );

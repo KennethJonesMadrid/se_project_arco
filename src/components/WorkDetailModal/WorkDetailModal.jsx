@@ -4,7 +4,14 @@ import saveIcon from "../../assets/like-icon.png";
 import playIcon from "../../assets/play-icon.png";
 import dateIcon from "../../assets/date-icon.png";
 
-function WorkDetailModal({ work, isOpen, onClose, onSaveWork, isSaved }) {
+function WorkDetailModal({
+  work,
+  isOpen,
+  onClose,
+  onSaveWork,
+  isSaved,
+  onPlayWork,
+}) {
   if (!isOpen || !work) {
     return null;
   }
@@ -67,7 +74,15 @@ function WorkDetailModal({ work, isOpen, onClose, onSaveWork, isSaved }) {
           </div>
 
           <div className="work-detail__actions">
-            <button className="work-detail__play-btn" type="button">
+            <button
+              className="work-detail__play-btn"
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onPlayWork(work);
+              }}
+              title="Search on Youtube!"
+            >
               <img src={playIcon} alt="play" />
               Play
             </button>

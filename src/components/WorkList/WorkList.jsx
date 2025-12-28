@@ -4,7 +4,14 @@ import "./WorkList.css";
 import WorkCard from "../WorkCard/WorkCard";
 import { INITIAL_WORKS_COUNT, WORKS_INCREMENT } from "../../utils/constants";
 
-function WorkList({ onWorkClick, searchQuery, savedWorks, onSaveWork, works }) {
+function WorkList({
+  onWorkClick,
+  searchQuery,
+  savedWorks,
+  onSaveWork,
+  works,
+  onPlayWork,
+}) {
   const [visibleCount, setVisibleCount] = useState(INITIAL_WORKS_COUNT);
 
   useEffect(() => {
@@ -40,6 +47,7 @@ function WorkList({ onWorkClick, searchQuery, savedWorks, onSaveWork, works }) {
               key={work.id}
               isSaved={isSaved}
               onSaveWork={onSaveWork}
+              onPlayWork={onPlayWork}
             />
           );
         })}

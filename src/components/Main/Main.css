@@ -33,6 +33,14 @@
   margin: 0 auto;
 }
 
+.main__no-results {
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  font-size: 13px;
+  margin: 40px 0;
+  font-family: "Inter", sans-serif;
+}
+
 .main__error {
   color: #ff6b6b;
   text-align: center;

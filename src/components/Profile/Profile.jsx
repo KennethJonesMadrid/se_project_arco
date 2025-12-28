@@ -2,7 +2,13 @@ import "./Profile.css";
 import avatar from "../../assets/avatar-icon.png";
 import WorkList from "../WorkList/WorkList";
 
-function Profile({ savedWorks, onWorkClick, onSaveWork, currentUser }) {
+function Profile({
+  savedWorks,
+  onWorkClick,
+  onSaveWork,
+  currentUser,
+  onPlayWork,
+}) {
   const hasSavedWorks = savedWorks.length > 0;
   return (
     <main className="profile">

@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
-function LoginModal({ isOpen, onClose, onToggleToRegister, onLogin }) {
+function LoginModal({
+  isOpen,
+  onClose,
+  onToggleToRegister,
+  onLogin,
+  authError,
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,7 +19,7 @@ function LoginModal({ isOpen, onClose, onToggleToRegister, onLogin }) {
 
     if (!isFormValid) return;
 
-    onLogin({ email });
+    onLogin({ email, password });
 
     setEmail("");
     setPassword("");
@@ -64,6 +70,7 @@ function LoginModal({ isOpen, onClose, onToggleToRegister, onLogin }) {
           className="form__input"
         ></input>
       </label>
+      {authError && <p className="modal__error">{authError}</p>}
     </ModalWithForm>
   );
 }

@@ -4,7 +4,7 @@ import DurationIcon from "../../assets/duration-icon.svg";
 import PlayIcon from "../../assets/play-icon.png";
 import LikeIcon from "../../assets/like-icon.png";
 
-function WorkCard({ onWorkClick, work, isSaved, onSaveWork }) {
+function WorkCard({ onWorkClick, work, isSaved, onSaveWork, onPlayWork }) {
   const handleLikeClick = () => {
     onSaveWork(work);
   };
@@ -34,7 +34,15 @@ function WorkCard({ onWorkClick, work, isSaved, onSaveWork }) {
             <p className="work-card__period">{work.composer.epoch}</p>
           </div>
           <div className="work-card__actions-btns">
-            <button type="button" className="work-card__play-btn">
+            <button
+              type="button"
+              className="work-card__play-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                onPlayWork(work);
+              }}
+              title="Search on Youtube!"
+            >
               <img className="work-card__play-icon" src={PlayIcon} alt="Play" />
             </button>
             <button

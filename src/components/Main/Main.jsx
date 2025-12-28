@@ -11,6 +11,7 @@ function Main({
   works,
   isLoading,
   errorMessage,
+  onPlayWork,
 }) {
   const violinWorks = getViolinWorks();
 
@@ -22,6 +23,11 @@ function Main({
           {searchQuery ? `Results for "${searchQuery}"` : "Works"}
         </h2>
         {errorMessage && <p className="main__error">{errorMessage}</p>}
+        {!isLoading && !errorMessage && works.length === 0 && searchQuery && (
+          <p className="main__no-results">
+            No results found for "{searchQuery}"
+          </p>
+        )}
       </div>
 
       {isLoading ? (
@@ -33,6 +39,7 @@ function Main({
           searchQuery={searchQuery}
           savedWorks={savedWorks}
           onSaveWork={onSaveWork}
+          onPlayWork={onPlayWork}
         />
       )}
     </main>
