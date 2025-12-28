@@ -1,0 +1,161 @@
+.work-card {
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 442.695px;
+  height: 600px;
+}
+
+.work-card__image-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.work-card__image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.work-card__content {
+  background-color: #121212;
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-card__year-badge-container {
+  display: flex;
+  max-width: 72px;
+  position: absolute;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  top: 16px;
+  left: 355px;
+  padding: 6px 12px;
+  gap: 6px;
+  backdrop-filter: blur(4px);
+}
+
+.work-card__year-icon {
+  height: 14px;
+  align-self: center;
+}
+
+.work-card__year {
+  margin: 0;
+  color: #c6a664;
+  font-family: "Playfair Display", serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+}
+
+.work-card__title {
+  color: #ffffff;
+  font-family: "Playfair Display", serif;
+  font-size: 17.6px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24.2px;
+  letter-spacing: 0.176px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.work-card__composer {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: "Inter", sans-serif;
+  font-size: 13.6px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20.4px;
+  letter-spacing: 1.36px;
+  text-transform: uppercase;
+  margin-top: 3.65px;
+  margin-bottom: 12.86px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.work-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 11.97px;
+  margin-top: auto;
+}
+
+.work-card__duration-container {
+  display: flex;
+  gap: 6px;
+}
+
+.work-card__duration-icon {
+}
+
+.work-card__period {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.work-card__actions-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.work-card__play-btn {
+  background-color: #c6a664;
+  border-style: none;
+  border-radius: 10px;
+  display: flex;
+  width: 35.977px;
+  height: 35.977px;
+  padding: 10.996px 11.016px 11.016px 10.996px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.work-card__play-icon {
+}
+
+.work-card__like-btn {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-style: none;
+  border-radius: 10px;
+  display: flex;
+  width: 35.977px;
+  height: 35.977px;
+  padding: 10.996px 11.016px 11.016px 10.996px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.work-card__like-btn_active .work-card__like-icon {
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.9));
+}
+
+.work-card__like-icon {
+  opacity: 0.6;
+  transform: scale(1);
+}
